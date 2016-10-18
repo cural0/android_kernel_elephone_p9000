@@ -203,7 +203,7 @@ static unsigned int get_constant_voltage(void)
 		else
 			cv = V_CC2TOPOFF_THRES;
 
-		battery_log(BAT_LOG_FULL, "[BIF]dynamic CV=%dmV\n", cv);
+		battery_log(BAT_LOG_CRTI, "[BIF]dynamic CV=%dmV\n", cv);
 	}
 #endif
 	return cv;
@@ -481,7 +481,7 @@ static void battery_pump_express_algorithm_start(void)
 					battery_log(BAT_LOG_CRTI,
 						    "[PE+]adaptor failed to output 12V, Please check adaptor.");
 				} else
-					battery_log(BAT_LOG_FULL,
+					battery_log(BAT_LOG_CRTI,
 						    "[PE+]adaptor successed to output 12V.");
 				charger_vol = battery_meter_get_charger_voltage();
 			}
@@ -1079,7 +1079,7 @@ static void pchr_turn_on_charging(void)
 		/*HW initialization */
 		battery_charging_control(CHARGING_CMD_INIT, NULL);
 
-		battery_log(BAT_LOG_FULL, "charging_hw_init\n");
+		battery_log(BAT_LOG_CRTI, "charging_hw_init\n");
 
 #if defined(CONFIG_MTK_PUMP_EXPRESS_PLUS_SUPPORT)
 		battery_pump_express_algorithm_start();
@@ -1093,26 +1093,26 @@ static void pchr_turn_on_charging(void)
 				g_temp_input_CC_value = batt_cust_data.ac_charger_current;
 
 			g_temp_CC_value = batt_cust_data.ac_charger_current;
-			battery_log(BAT_LOG_FULL,
+			battery_log(BAT_LOG_CRTI,
 				    "USB_CURRENT_UNLIMITED, use batt_cust_data.ac_charger_current\n");
 #ifndef CONFIG_MTK_SWITCH_INPUT_OUTPUT_CURRENT_SUPPORT
 		} else if (g_bcct_flag == 1) {
 			select_charging_current_bcct();
 
-			battery_log(BAT_LOG_FULL, "[BATTERY] select_charging_current_bcct !\n");
+			battery_log(BAT_LOG_CRTI, "[BATTERY] select_charging_current_bcct !\n");
 		} else {
 			select_charging_current();
 
-			battery_log(BAT_LOG_FULL, "[BATTERY] select_charging_current !\n");
+			battery_log(BAT_LOG_CRTI, "[BATTERY] select_charging_current !\n");
 		}
 #else
 		} else if (g_bcct_flag == 1 || g_bcct_input_flag == 1) {
 			select_charging_current();
 			select_charging_current_bcct();
-			battery_log(BAT_LOG_FULL, "[BATTERY] select_charging_curret_bcct !\n");
+			battery_log(BAT_LOG_CRTI, "[BATTERY] select_charging_curret_bcct !\n");
 		} else {
 			select_charging_current();
-			battery_log(BAT_LOG_FULL, "[BATTERY] select_charging_curret !\n");
+			battery_log(BAT_LOG_CRTI, "[BATTERY] select_charging_curret !\n");
 		}
 #endif
 		battery_log(BAT_LOG_CRTI,
@@ -1153,7 +1153,7 @@ static void pchr_turn_on_charging(void)
 	/* enable/disable charging */
 	battery_charging_control(CHARGING_CMD_ENABLE, &charging_enable);
 
-	battery_log(BAT_LOG_FULL, "[BATTERY] pchr_turn_on_charging(), enable =%d !\r\n",
+	battery_log(BAT_LOG_CRTI, "[BATTERY] pchr_turn_on_charging(), enable =%d !\r\n",
 		    charging_enable);
 }
 
@@ -1190,7 +1190,7 @@ PMU_STATUS BAT_PreChargeModeAction(void)
 
 PMU_STATUS BAT_ConstantCurrentModeAction(void)
 {
-	battery_log(BAT_LOG_FULL, "[BATTERY] CC mode charge, timer=%d on %d !!\n\r",
+	battery_log(BAT_LOG_CRTI, "[BATTERY] CC mode charge, timer=%d on %d !!\n\r",
 		    BMT_status.CC_charging_time, BMT_status.total_charging_time);
 
 	BMT_status.PRE_charging_time = 0;
