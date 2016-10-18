@@ -274,6 +274,7 @@ static void mtk_ta_increase(void)
 
 	if (ta_cable_out_occur == KAL_FALSE) {
 		battery_charging_control(CHARGING_CMD_SET_TA_CURRENT_PATTERN, &ta_current_pattern);
+		battery_log(BAT_LOG_CRTI, "[PE+]sent command CHARGING_CMD_SET_TA_CURRENT_PATTERN\n");
 	} else {
 		ta_check_chr_type = KAL_TRUE;
 		battery_log(BAT_LOG_CRTI, "[PE+]mtk_ta_increase() Cable out\n");
